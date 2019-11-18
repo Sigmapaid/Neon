@@ -1,14 +1,13 @@
 package com.example.neon;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Flight {
     private int flightNumber;
-    private List<FlightService> servicesList;
+    private List<FlightService> servicesList = new ArrayList<>();
 
-    public Flight() {
-    }
 
     public Flight(int flightNumber, List<FlightService> servicesList) {
         this.flightNumber = flightNumber;

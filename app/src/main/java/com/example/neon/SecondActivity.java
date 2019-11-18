@@ -38,13 +38,11 @@ import java.util.List;
 public class SecondActivity extends AppCompatActivity {
 
     private ListView lvFlight;
-    public List<Flight> data;
+    public List<Flight> data = new ArrayList<Flight>();
     public FlightsAdapter adapter;
     private List<FlightService> servicesList;
     private List<FlightService> servicesList2;
     private static String tag = "123";
-
-    Handler handler;
 
 //    private static final int PERMISSION_INTERNET = 1;
 //    private static final int PERMISSION_ACCESS_NETWORK_STATE = 2;
@@ -88,19 +86,15 @@ public class SecondActivity extends AppCompatActivity {
         lvFlight = (ListView) findViewById(R.id.listFlight);
 //        handler = new Handler(getApplicationContext().getMainLooper());
 
-        data = new ArrayList<Flight>();
+//        data = new ArrayList<Flight>();
 //        Bundle bundle = savedInstanceState;
 //        data = bundle.getSerializable("flight_json");
 
-        String flightJson = getIntent().getStringExtra("flight_json");
-//        data = getIntent().getSerializableExtra(("flight_json");
-
-        data = new Gson().fromJson(flightJson, FlightList.class);
 
 //        Log.i("data w second: " + data.);
 //        servicesList = new ArrayList<FlightService>();
 //        servicesList2 = new ArrayList<FlightService>();
-
+//
 //        servicesList.add(new FlightService("autobus"));
 //        servicesList.add(new FlightService("tankowanie"));
 //        servicesList.add(new FlightService("wypychanie"));
@@ -130,20 +124,48 @@ public class SecondActivity extends AppCompatActivity {
 //        SharedPreferences m = PreferenceManager.getDefaultSharedPreferences(this);
 //        String mResponse = m.getString("Response", "");
 //        data = new Gson().fromJson(mResponse, FlightList.class);
+        String flightJson = getIntent().getStringExtra("flight_json");
+        Log.i("jsonResponse z serwera po intent: ", flightJson);
+//        data = getIntent().getSerializableExtra(("flight_json");
 
+        data = new Gson().fromJson(flightJson, FlightList.class);
+        if((data != null)){
+        Log.i("jsonResponse z serwera po intent: ", flightJson);
+
+        }else {
+            Log.i("Data po intent: ", "brak danych");
+
+        }
+
+        try {
 
         adapter = new FlightsAdapter(this, data);
+        lvFlight.setAdapter(adapter);
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+
+//            if (data != null){
+//
+//            } else if (data == null) {
+//
+////                    adapter = new FlightsAdapter(this, data);
+////                    this.lvFlight.setAdapter(adapter);
+////        adapter.notifyDataSetChanged();
+//        lvFlight.postInvalidate();
+//
+//            }
 
 
 //        adapter.notifyDataSetChanged();
 
 //        lvFlight.setAdapter(adapter);
 //            Log.i("Zawartosc data: ", String.valueOf(data.size()));
-        lvFlight.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
         //odswiezenie ekranu
-        lvFlight.postInvalidate();
 
 //            Log.i("Zawartosc data: ",data.get(0).getFlightNumber());
 

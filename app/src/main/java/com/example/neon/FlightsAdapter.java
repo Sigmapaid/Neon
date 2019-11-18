@@ -11,14 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlightsAdapter extends ArrayAdapter<Flight> {
 
-    private List<Flight> data;
+    private List<Flight> data = new ArrayList<>();
     private Context context;
 
-    public FlightsAdapter(Context context, List<Flight> data) {
+    public FlightsAdapter(@NonNull Context context, List<Flight> data) {
         super(context, R.layout.layout_list_row);
         this.data = data;
         this.context = context;
@@ -32,6 +33,7 @@ public class FlightsAdapter extends ArrayAdapter<Flight> {
         return data.size();
     }
 
+    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;

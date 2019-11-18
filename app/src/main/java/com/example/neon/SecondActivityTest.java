@@ -93,10 +93,10 @@ public class SecondActivityTest extends AppCompatActivity {
             JSONArray items = value.getJSONArray("servicesList");
             for(int i=0;i<items.length();i++){
                 JSONObject item = items.getJSONObject(i);
-                Flight nm = new Flight();
-                nm.setFlightNumber(Integer.parseInt(item.optString("flightNumber")));
+//                Flight nm = new Flight();
+//                nm.setFlightNumber(Integer.parseInt(item.optString("flightNumber")));
 //                nm.setServicesList(item.getJSONArray("servicesList"));
-                data.add(nm);
+//                data.add(nm);
             }
         }
         catch(Exception e){

@@ -2,7 +2,7 @@ package com.example.neon;
 
 import java.io.Serializable;
 
-public class FlightService implements Serializable {
+public class FlightService {
     private String name;
 
     public FlightService(String name) {
