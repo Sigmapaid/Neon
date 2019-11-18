@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private void validate (String name, String userPassword){
         if (name.equals("admin") && userPassword.equals("1234")){
 //            fetchData fD = new fetchData();
-            Intent intent = new Intent(this.getApplicationContext(), GetDataFromServer.class);
+            Intent intent = new Intent(this.getApplicationContext(), SecondActivity.class);
             startActivity(intent);
             finish();
             return;

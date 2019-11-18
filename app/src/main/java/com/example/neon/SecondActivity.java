@@ -1,6 +1,7 @@
 package com.example.neon;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -22,7 +23,15 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,8 +66,6 @@ public class SecondActivity extends AppCompatActivity {
 //        lvFlight.setAdapter(adapter);
 
 
-
-
         lvFlight.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -73,8 +80,7 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
-    public void _loadAPI_POST()
-    {
+    public void _loadAPI_POST() {
         // Volley is an HTTP library that makes networking for Android apps easier and most importantly, faster.
         //Volley is not suitable for large download or streaming operations, since Volley holds all responses in memory during parsing.
         // Read https://developer.android.com/training/volley/index.html
@@ -88,55 +94,97 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
-    private void _SEND(Map<String, String> getPARAM)
-    {
-        try
-        {
+    private void _SEND(Map<String, String> getPARAM) {
+        try {
 
-            String URL = "";
+//            String URL = "http://www.mocky.io/v2/5dd322e93300002a007a4026";
+            String URL = "http://10.0.2.2:3000/flight";
             VolleyApiCAll volleyApiCAll = new VolleyApiCAll(SecondActivity.this);
-            volleyApiCAll.Volley_POST(getPARAM, URL, new VolleyApiCAll.VolleyCallback()
-            {
+            volleyApiCAll.Volley_GET(URL, new VolleyApiCAll.VolleyCallback() {
+
                 @Override
-                public void onSuccessResponse(String result)
-                {
+                public void onSuccessResponse(String result) {
 
 
-                    try
-                    {
-                        if(result.matches("VOLLEY_NETWORK_ERROR"))
-                        {
+                    try {
+                        if (result.matches("VOLLEY_NETWORK_ERROR")) {
                             Toast.makeText(SecondActivity.this, "NETWORK PROBLEM", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            try
-                            {
+                        } else {
+                            try {
 
 
-                                System.out.println("RESULT"+result);
+//                                System.out.println("RESULT" + result);
                                 // GET JSON THROUGH result
+//                                JSONArray jArray = new JSONArray(result);
 
+                                Type collectionType = new TypeToken<Collection<Flight>>(){}.getType();
+                                Collection<Flight> postsList = new Gson().fromJson(result, collectionType);
 
-                            }
-                            catch (Exception e)
-                            {
+//                                data = new Gson().fromJson(result, FlightList.class);
+//                                List<Flight> postsList = Arrays.asList(new Gson().fromJson(result,Flight.class));
+                                data = new ArrayList<>(postsList);
+//                                while (hasNext())
+//                                    action.accept(next());
+//                                 data  = new Gson().fromJson(result, Flight.class);
+                                adapter = new FlightsAdapter(SecondActivity.this, data);
+                                lvFlight.setAdapter(adapter);
+                            } catch (Exception e) {
 
                                 e.printStackTrace();
+
+
                             }
+
+
                         }
-                    }
-                    catch (Exception e)
-                    {
+                    } catch (Exception e) {
 
                         e.printStackTrace();
                     }
+
                 }
             });
+//            volleyApiCAll.Volley_POST(getPARAM, URL, new VolleyApiCAll.VolleyCallback()
+//            {
+//                @Override
+//                public void onSuccessResponse(String result)
+//                {
+//
+//
+//                    try
+//                    {
+//                        if(result.matches("VOLLEY_NETWORK_ERROR"))
+//                        {
+//                            Toast.makeText(SecondActivity.this, "NETWORK PROBLEM", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else
+//                        {
+//                            try
+//                            {
+//
+//
+//                                System.out.println("RESULT"+result);
+//                                // GET JSON THROUGH result
+//
+//
+//                            }
+//                            catch (Exception e)
+//                            {
+//
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                    catch (Exception e)
+//                    {
+//
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
 
-        }
-        catch (Exception e)
-        {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
