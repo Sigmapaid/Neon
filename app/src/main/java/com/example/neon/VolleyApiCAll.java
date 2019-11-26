@@ -24,6 +24,7 @@ import java.util.Map;
 public class VolleyApiCAll
 {
     Context context;
+    String accessToken;
 
     public VolleyApiCAll(Context context_) {
         context=context_;
@@ -33,9 +34,9 @@ public class VolleyApiCAll
     {
         void onSuccessResponse(String result);
     }
-    public void Volley_GET(String url, final VolleyCallback callback)
+    public void Volley_GET(String url, String accessToken, final VolleyCallback callback)
     {
-
+        final String finalAccessToken = accessToken;
         StringRequest strREQ = new StringRequest(Request.Method.GET, url, new Response.Listener < String > ()
         {
             @Override
@@ -56,19 +57,23 @@ public class VolleyApiCAll
             /**
              * Passing some request headers
              * */
-/*            @Override
+            @Override
             public Map<String, String> getHeaders() throws AuthFailureError
             {
-                return createBasicAuthHeader("enter_username", "enter_password");
-            }*/
+//                return createBasicAuthHeader("enter_username", "enter_password");
+                return getParams();
+            }
+
+//            String accesstoken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9saXZpZXJAbWFpbC5jb20iLCJpYXQiOjE1NzQyOTAxODYsImV4cCI6MTU3NDI5Mzc4Niwic3ViIjoiMSJ9.N3Vsj80cAYX_X1lfLXubLFOph9dNAqiU4cKKC_YWYqg";
 
             @Override
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Username", "enter_username");
-                params.put("Password", "enter_password");
-                params.put("grant_type", "password");
+//                params.put("Username", "enter_username");
+//                params.put("Password", "enter_password");
+//                params.put("grant_type", "password");
+                params.put("Authorization", "Bearer " + finalAccessToken);
 
                 return params;
             }
@@ -116,16 +121,19 @@ public class VolleyApiCAll
                 /**
                  * Passing some request headers
                  * */
+
+//                String accesstoken = (String) params.get("token");
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String,String> params = new HashMap<String, String>();
-
-                    params.put("Content-Type", "multipart/form-data; boundary=" + BOUNDARY+"; charset=utf-8");
+//                    params.put("Authorization", "Bearer " + accesstoken);
+                    params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
                     return params;
                 }
 
                 @Override
                 public String getBodyContentType() {
+//                    return "\\r\\n    \\\"email\\\": \\\"olivier@mail.com\\\",\\r\\n    \\\"password\\\": \\\"bestPassw0rd\\\"\\r\\n";
                     return "multipart/form-data; charset=utf-8";
                 }
 

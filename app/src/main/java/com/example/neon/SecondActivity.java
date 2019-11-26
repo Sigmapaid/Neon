@@ -1,12 +1,5 @@
 package com.example.neon;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.preference.PreferenceManager;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,22 +8,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -49,8 +33,10 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         lvFlight = (ListView) findViewById(R.id.listFlight);
+        String accessToken = getIntent().getStringExtra("token");
+//        Log.i("Token: ",accessToken);
 
-        _loadAPI_POST();
+        _loadAPI_POST(accessToken);
 
 //        String json2 = new Gson().toJson(data);
 //        data = new Gson().fromJson(mResponse, FlightList.class);
@@ -58,10 +44,6 @@ public class SecondActivity extends AppCompatActivity {
 //        String flightJson = getIntent().getStringExtra("flight_json");
 //
 //        data = new Gson().fromJson(flightJson, FlightList.class);
-//
-//
-//
-//
 //        adapter = new FlightsAdapter(this, data);
 //        lvFlight.setAdapter(adapter);
 
@@ -80,7 +62,7 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
-    public void _loadAPI_POST() {
+    public void _loadAPI_POST( String token) {
         // Volley is an HTTP library that makes networking for Android apps easier and most importantly, faster.
         //Volley is not suitable for large download or streaming operations, since Volley holds all responses in memory during parsing.
         // Read https://developer.android.com/training/volley/index.html
@@ -90,17 +72,17 @@ public class SecondActivity extends AppCompatActivity {
         jsonPOST.put("KEY", "VAL");
         jsonPOST.put("KEY1", "VAL1");
 
-        _SEND(jsonPOST); // Check INTERNET is ON or NOT ?
+        _SEND(jsonPOST,token); // Check INTERNET is ON or NOT ?
 
     }
 
-    private void _SEND(Map<String, String> getPARAM) {
+    private void _SEND(Map<String, String> getPARAM, String token) {
         try {
 
 //            String URL = "http://www.mocky.io/v2/5dd322e93300002a007a4026";
             String URL = "http://10.0.2.2:3000/flight";
             VolleyApiCAll volleyApiCAll = new VolleyApiCAll(SecondActivity.this);
-            volleyApiCAll.Volley_GET(URL, new VolleyApiCAll.VolleyCallback() {
+            volleyApiCAll.Volley_GET(URL, token, new VolleyApiCAll.VolleyCallback() {
 
                 @Override
                 public void onSuccessResponse(String result) {
@@ -111,8 +93,6 @@ public class SecondActivity extends AppCompatActivity {
                             Toast.makeText(SecondActivity.this, "NETWORK PROBLEM", Toast.LENGTH_SHORT).show();
                         } else {
                             try {
-
-
 //                                System.out.println("RESULT" + result);
                                 // GET JSON THROUGH result
 //                                JSONArray jArray = new JSONArray(result);
@@ -129,19 +109,12 @@ public class SecondActivity extends AppCompatActivity {
                                 adapter = new FlightsAdapter(SecondActivity.this, data);
                                 lvFlight.setAdapter(adapter);
                             } catch (Exception e) {
-
                                 e.printStackTrace();
-
-
                             }
-
-
                         }
                     } catch (Exception e) {
-
                         e.printStackTrace();
                     }
-
                 }
             });
 //            volleyApiCAll.Volley_POST(getPARAM, URL, new VolleyApiCAll.VolleyCallback()

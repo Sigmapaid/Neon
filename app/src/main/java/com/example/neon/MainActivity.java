@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.JsonToken;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +18,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate(userName.getText().toString(), password.getText().toString());
+//                validate(userName.getText().toString(), password.getText().toString());
+                _loadAPI_POST();
             }
         });
 
@@ -54,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     private void validate (String name, String userPassword){
         if (name.equals("admin") && userPassword.equals("1234")){
 //            fetchData fD = new fetchData();
+//            String stringToJson = "\r\n    \"email\": \"+ name + \",\r\n    \"password\": \"+ userPassword +\"\r\n";
+//            Gson g = (JsonToken) new Gson().toJson(stringToJson); .fromJson(stringToJson, Player.class)
             Intent intent = new Intent(this.getApplicationContext(), SecondActivity.class);
             startActivity(intent);
             finish();
@@ -69,6 +80,111 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void _loadAPI_POST() {
+        // Volley is an HTTP library that makes networking for Android apps easier and most importantly, faster.
+        //Volley is not suitable for large download or streaming operations, since Volley holds all responses in memory during parsing.
+        // Read https://developer.android.com/training/volley/index.html
+
+        //Add New Address
+        Map<String, String> jsonPOST = new HashMap<>();
+        jsonPOST.put("email", userName.getText().toString());
+        jsonPOST.put("password", password.getText().toString());
+
+//        String loginJson = new Gson().toJson(jsonPOST, LoginJson.class);
+
+//        Log.i("jsonPOST: ", loginJson);
+
+        _SEND(jsonPOST); // Check INTERNET is ON or NOT ?
+
+    }
+
+    private void _SEND(Map<String, String> getPARAM) {
+        try {
+
+//            String URL = "http://www.mocky.io/v2/5dd322e93300002a007a4026";
+            String URL = "http://10.0.2.2:3000/login";
+            VolleyApiCAll volleyApiCAll = new VolleyApiCAll(MainActivity.this);
+//            volleyApiCAll.Volley_GET(URL, new VolleyApiCAll.VolleyCallback() {
+//
+//                @Override
+//                public void onSuccessResponse(String result) {
+//
+//
+//                    try {
+//                        if (result.matches("VOLLEY_NETWORK_ERROR")) {
+//                            Toast.makeText(MainActivity.this, "NETWORK PROBLEM", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            try {
+//                                System.out.println("RESULT" + result);
+//                                // GET JSON THROUGH result
+////                                JSONArray jArray = new JSONArray(result);
+//
+////                                Type collectionType = new TypeToken<Collection<Flight>>(){}.getType();
+////                                Collection<Flight> postsList = new Gson().fromJson(result, collectionType);
+//
+////                                data = new Gson().fromJson(result, FlightList.class);
+////                                List<Flight> postsList = Arrays.asList(new Gson().fromJson(result,Flight.class));
+////                                data = new ArrayList<>(postsList);
+////                                while (hasNext())
+////                                    action.accept(next());
+////                                 data  = new Gson().fromJson(result, Flight.class);
+////                                adapter = new FlightsAdapter(SecondActivity.this, data);
+////                                lvFlight.setAdapter(adapter);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+            volleyApiCAll.Volley_POST(getPARAM, URL, new VolleyApiCAll.VolleyCallback()
+            {
+                @Override
+                public void onSuccessResponse(String result)
+                {
+
+
+                    try
+                    {
+                        if(result.matches("VOLLEY_NETWORK_ERROR"))
+                        {
+                            Toast.makeText(MainActivity.this, "NETWORK PROBLEM", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            try
+                            {
+
+
+                                System.out.println("RESULT"+result);
+                                // GET JSON THROUGH result
+
+
+                            }
+                            catch (Exception e)
+                            {
+
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
