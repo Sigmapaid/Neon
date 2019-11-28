@@ -18,10 +18,9 @@
             android:label="@string/title_activity_login">
 
         </activity>
-        <activity android:name=".GetDataFromServer" />
-        <activity android:name=".SecondActivity" />
-        <activity android:name=".FlightDetailActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.SecondActivity" />
+        <activity android:name=".Activity.FlightDetailActivity" />
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

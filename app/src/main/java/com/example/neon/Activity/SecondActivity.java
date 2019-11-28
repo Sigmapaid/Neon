@@ -1,4 +1,4 @@
-package com.example.neon;
+package com.example.neon.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +12,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.neon.FlightsAdapter;
+import com.example.neon.R;
+import com.example.neon.data.model.Flight;
+import com.example.neon.data.model.FlightList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -44,18 +48,17 @@ public class SecondActivity extends AppCompatActivity {
 //        String json2 = new Gson().toJson(data);
 //        data = new Gson().fromJson(mResponse, FlightList.class);
 
-        String flightJson = getIntent().getStringExtra("flight_json");
-        Type collectionType = new TypeToken<Collection<Flight>>(){}.getType();
-        Collection<Flight> postsList = new Gson().fromJson(flightJson, collectionType);
+//        String flightJson = getIntent().getStringExtra("flight_json");
+//        Type collectionType = new TypeToken<Collection<Flight>>(){}.getType();
+//        Collection<Flight> postsList = new Gson().fromJson(flightJson, collectionType);
+//        data = new ArrayList<>(postsList);
 
 //                                data = new Gson().fromJson(result, FlightList.class);
 //        List<Flight> postsList = Arrays.asList(new Gson().fromJson(flightJson,Flight.class));
-        data = new ArrayList<>(postsList);
 
-
-//        String flightJson = getIntent().getStringExtra("flight_json");
-//        Log.i("String po intent ", flightJson);
-//        data = new Gson().fromJson(flightJson, FlightList.class);
+        String flightJson = getIntent().getStringExtra("flight_json");
+        Log.i("String po intent ", flightJson);
+        data =  new Gson().fromJson(flightJson, FlightList.class);
         adapter = new FlightsAdapter(this, data);
         lvFlight.setAdapter(adapter);
 

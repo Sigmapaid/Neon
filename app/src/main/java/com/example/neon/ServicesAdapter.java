@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.neon.data.model.FlightService;
+
 import java.util.List;
 
 public class ServicesAdapter extends ArrayAdapter<FlightService> {

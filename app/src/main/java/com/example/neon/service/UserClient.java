@@ -1,8 +1,6 @@
 package com.example.neon.service;
 
-import com.example.neon.Flight;
-import com.example.neon.FlightList;
-import com.example.neon.Result;
+import com.example.neon.data.model.Flight;
 import com.example.neon.data.model.Login;
 import com.example.neon.data.model.User;
 
@@ -12,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface UserClient {
@@ -19,6 +18,7 @@ public interface UserClient {
     @POST("login")
     Call<User> login(@Body Login login);
 
+    @Headers("Content-Type: application/json")
     @GET("flight")
-    Call<List<FlightList>> getFlights(@Header("Authorization") String authToken);
+    Call<List<Flight>> getFlights(@Header("Authorization") String authToken);
 }

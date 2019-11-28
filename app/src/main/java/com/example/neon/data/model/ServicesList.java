@@ -1,4 +1,4 @@
-package com.example.neon;
+package com.example.neon.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,6 +1,6 @@
-package com.example.neon;
+package com.example.neon.data.model;
 
-import com.example.neon.data.model.User;
+import com.example.neon.data.model.Flight;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

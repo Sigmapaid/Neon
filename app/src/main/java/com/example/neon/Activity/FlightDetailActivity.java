@@ -1,17 +1,18 @@
-package com.example.neon;
+package com.example.neon.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.neon.R;
+import com.example.neon.ServicesAdapter;
+import com.example.neon.data.model.Flight;
+import com.example.neon.data.model.FlightService;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FlightDetailActivity extends AppCompatActivity {
@@ -49,7 +50,7 @@ public class FlightDetailActivity extends AppCompatActivity {
 //        public class YourClassList extends ArrayList<YourClass> {}
 //        And use it when parsing the JSON:
 
-        data2 = new Gson().fromJson(name, FlightServiceList.class);
+        data2 = new Gson().fromJson(name, Flight.FlightServiceList.class);
 
 //        data = (List<FlightService>) getIntent().getSerializableExtra("flight_url");
 

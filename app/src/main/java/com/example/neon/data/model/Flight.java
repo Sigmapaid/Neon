@@ -1,9 +1,8 @@
-package com.example.neon;
+package com.example.neon.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,4 +30,6 @@ public class Flight {
         this.servicesList = servicesList;
     }
 
+    public static class FlightServiceList extends ArrayList<FlightService> {
+    }
 }

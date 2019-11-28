@@ -15,9 +15,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -28,15 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.neon.R;
-import com.example.neon.SecondActivity;
-import com.example.neon.data.LoginDataSource;
-import com.example.neon.ui.login.LoginViewModel;
-import com.example.neon.ui.login.LoginViewModelFactory;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.neon.Activity.SecondActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
