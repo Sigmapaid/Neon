@@ -11,6 +11,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -32,5 +36,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.koushikdutta.ion:ion:2.1.7'
+//    implementation 'com.koushikdutta.ion:ion:2.1.7'
+    implementation 'com.koushikdutta.ion:ion:3.0.8'
+    implementation 'com.squareup.retrofit2:retrofit:(2.6.2)'
+//    implementation 'com.squareup.retrofit2', name: 'retrofit', version: '2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 }

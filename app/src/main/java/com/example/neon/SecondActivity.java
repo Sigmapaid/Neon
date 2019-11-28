@@ -1,6 +1,8 @@
 package com.example.neon;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +26,7 @@ import java.util.Map;
 public class SecondActivity extends AppCompatActivity {
 
     private ListView lvFlight;
-    public List<Flight> data = new ArrayList<Flight>();
+    public List<Flight> data;
     public FlightsAdapter adapter;
 
 
@@ -33,19 +36,28 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         lvFlight = (ListView) findViewById(R.id.listFlight);
-        String accessToken = getIntent().getStringExtra("token");
+//        String accessToken = getIntent().getStringExtra("token");
 //        Log.i("Token: ",accessToken);
 
-        _loadAPI_POST(accessToken);
+//        _loadAPI_POST(accessToken);
 
 //        String json2 = new Gson().toJson(data);
 //        data = new Gson().fromJson(mResponse, FlightList.class);
 
+        String flightJson = getIntent().getStringExtra("flight_json");
+        Type collectionType = new TypeToken<Collection<Flight>>(){}.getType();
+        Collection<Flight> postsList = new Gson().fromJson(flightJson, collectionType);
+
+//                                data = new Gson().fromJson(result, FlightList.class);
+//        List<Flight> postsList = Arrays.asList(new Gson().fromJson(flightJson,Flight.class));
+        data = new ArrayList<>(postsList);
+
+
 //        String flightJson = getIntent().getStringExtra("flight_json");
-//
+//        Log.i("String po intent ", flightJson);
 //        data = new Gson().fromJson(flightJson, FlightList.class);
-//        adapter = new FlightsAdapter(this, data);
-//        lvFlight.setAdapter(adapter);
+        adapter = new FlightsAdapter(this, data);
+        lvFlight.setAdapter(adapter);
 
 
         lvFlight.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,6 +72,15 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), "Naciśnięto przycisk wstecz", Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPref = this.getSharedPreferences("com.example.neon.data.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+        editor.commit();
+        super.onBackPressed();
     }
 
     public void _loadAPI_POST( String token) {

@@ -89,6 +89,12 @@ public class LoginActivity extends AppCompatActivity {
                 //Complete and destroy login activity once successful
 //
 //                finish();
+                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("com.example.neon.data.PREFERENCE_FILE_KEY",Context.MODE_PRIVATE);
+                String txt = sharedPref.getString("token", "");
+                Intent intent = new Intent(LoginActivity.this, SecondActivity.class);
+                intent.putExtra("token",txt);
+//                intent.putExtra("token",model.getToken());
+                startActivity(intent);
             }
         });
 
@@ -140,12 +146,12 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
 
-        SharedPreferences sharedPref = this.getSharedPreferences("com.example.neon.data.PREFERENCE_FILE_KEY",Context.MODE_PRIVATE);
-        String txt = sharedPref.getString("token", "");
-        Intent intent = new Intent(LoginActivity.this, SecondActivity.class);
-                intent.putExtra("token",txt);
-//                intent.putExtra("token",model.getToken());
-                startActivity(intent);
+//        SharedPreferences sharedPref = this.getSharedPreferences("com.example.neon.data.PREFERENCE_FILE_KEY",Context.MODE_PRIVATE);
+//        String txt = sharedPref.getString("token", "");
+//        Intent intent = new Intent(LoginActivity.this, SecondActivity.class);
+//                intent.putExtra("token",txt);
+////                intent.putExtra("token",model.getToken());
+//                startActivity(intent);
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 

@@ -13,10 +13,13 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.neon.data.model.Login;
+import com.example.neon.data.model.User;
+import com.example.neon.service.UserClient;
+import com.example.neon.ui.login.LoginActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -30,6 +33,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.Retrofit.Builder;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +52,29 @@ public class MainActivity extends AppCompatActivity {
     private EditText password;
     private Button btnLogin;
     private int counter = 3;
+
+//    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//    interceptor.;
+//    OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+//    HttpLoggingInterceptor.Logger
+
+
+
+
+
+    Retrofit.Builder builder = new Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:3000/")
+//            .client(new OkHttpClient().newBuilder()
+//                    .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+//                    .readTimeout(60, TimeUnit.SECONDS)
+//                    .writeTimeout(60, TimeUnit.SECONDS)
+//                    .connectTimeout(60, TimeUnit.SECONDS)
+//                    .build())
+            .addConverterFactory(GsonConverterFactory.create());
+
+    Retrofit retrofit = builder.build();
+    
+    UserClient userClient = retrofit.create(UserClient.class);
 
 
 
@@ -53,10 +91,73 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                validate(userName.getText().toString(), password.getText().toString());
-                _loadAPI_POST();
+//                _loadAPI_POST();
+                login();
             }
         });
 
+    }
+
+    private String token;
+
+    private void login() {
+        Login login = new Login("olivier@mail.com", "bestPassw0rd");
+        Call<User> call = userClient.login(login);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+//                    Toast.makeText(MainActivity.this,response.body().getAccessToken(),Toast.LENGTH_LONG).show();
+                    token = response.body().getAccessToken();
+                    getFlights(token);
+
+
+                }else {
+                    Toast.makeText(MainActivity.this,"login not correct",Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(MainActivity.this,"error :( w login",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void getFlights(String token) {
+
+        String authToken = "Bearer " + token;
+//        Log.i("Token: ",authToken);
+
+        Call<List<FlightList>> call = userClient.getFlights(authToken);
+
+        call.enqueue(new Callback<List<FlightList>>() {
+            @Override
+            public void onResponse(Call<List<FlightList>> call, Response<List<FlightList>> response) {
+                if (response.isSuccessful()) {
+//                    Toast.makeText(MainActivity.this,response.body().toString(),Toast.LENGTH_LONG).show();
+//                    Log.i("flights z serwera ",response.body().toString());
+                    List<FlightList> flightList = response.body();
+                    Log.i("flights z serwera, lista ",flightList.toString());
+
+
+                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                    intent.putExtra("flight_json",flightList.toString().trim());
+                    startActivity(intent);
+
+
+                }else {
+                    Toast.makeText(MainActivity.this,"token is not correct",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FlightList>> call, Throwable t) {
+                Toast.makeText(MainActivity.this,"error :( w getFlights",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

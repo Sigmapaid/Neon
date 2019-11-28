@@ -1,6 +1,16 @@
 package com.example.neon;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.SerializedName;
 
-public class FlightList extends ArrayList <Flight> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class FlightList {
+
+    @SerializedName("flight")
+    private List<Flight> flights;
+
+    public List<Flight> getFlights() {
+        return flights;
+    }
 }
