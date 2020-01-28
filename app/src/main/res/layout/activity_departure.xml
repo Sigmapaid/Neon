@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1B2B60"
-    tools:context=".Activity.SecondActivity">
+    tools:context=".Activity.DepartureActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -28,7 +28,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Przyloty"
+            android:text="Odloty"
             android:textColor="#ffffffff"
             android:textSize="30sp" />
     </LinearLayout>

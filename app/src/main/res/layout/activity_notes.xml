@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1B2B60"
-    tools:context=".Activity.SecondActivity">
+    tools:context=".Activity.NotesActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -15,10 +15,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivBackNotes"
             android:layout_width="52dp"
             android:layout_height="62dp"
-            android:onClick="onBackPressed"
             app:srcCompat="@drawable/ic_stat_name" />
 
         <TextView
@@ -28,21 +27,28 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Przyloty"
+            android:text="Notatki"
             android:textColor="#ffffffff"
             android:textSize="30sp" />
+
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listFlight"
-        android:layout_width="596dp"
-        android:layout_height="875dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_input_add"/>
 
-    </ListView>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="484dp"
+        android:layout_height="857dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:foregroundGravity="bottom|center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingTop="30dp"
+        android:text="TextView"
+        android:textColor="#ffffffff" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

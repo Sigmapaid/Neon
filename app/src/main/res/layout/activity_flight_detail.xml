@@ -4,11 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1B2B60"
     tools:context=".Activity.FlightDetailActivity">
 
-    <ListView
+    <Button
+        android:id="@+id/btnSave"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lvFlightDetail" />
+        android:layout_height="wrap_content"
+        android:text="Zapisz"
+        app:layout_constraintBottom_toTopOf="@+id/lvFlightDetail" />
+
+    <ListView
+        android:id="@+id/lvFlightDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

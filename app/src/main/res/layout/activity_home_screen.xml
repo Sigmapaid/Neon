@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1B2B60"
+    tools:context=".Activity.HomeScreenActivity">
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="52dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="backToLoginActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_stat_name" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="309dp"
+        android:layout_height="151dp"
+        android:layout_marginStart="115dp"
+        app:layout_constraintStart_toEndOf="@+id/ivBack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/samolot_mniejszy_2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        tools:layout_editor_absoluteX="196dp">
+<!--        android:elevation="16dp"-->
+<!--        android:background="@drawable/shadow"-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:elevation="16dp"
+            android:paddingBottom="30dp">
+
+            <Button
+                android:id="@+id/btnArrival"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient"
+                android:drawableLeft="@drawable/ic_flight_land_black_24dp"
+                android:fadingEdge="horizontal|vertical"
+                android:fadingEdgeLength="5dp"
+                android:minHeight="100dp"
+                android:paddingLeft="20dp"
+                android:text="Przyloty"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/btnDeparture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/gradient"
+                android:drawableLeft="@drawable/ic_flight_takeoff_black_24dp"
+                android:fadingEdge="horizontal|vertical"
+                android:fadingEdgeLength="50dp"
+                android:minHeight="100dp"
+                android:paddingLeft="20dp"
+                android:text="Odloty"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/gradient"
+            android:drawableLeft="@drawable/ic_announcement_black_24dp"
+            android:fadingEdge="none"
+            android:minHeight="70dp"
+            android:paddingLeft="25dp"
+            android:text="Zgłoszenia"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/gradient"
+            android:drawableLeft="@drawable/ic_create_black_24dp"
+            android:fadingEdge="none"
+            android:minHeight="70dp"
+            android:paddingLeft="20dp"
+            android:text="Notatki"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnNeonTools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/gradient"
+            android:drawableLeft="@drawable/ic_pan_tool_black_24dp"
+            android:fadingEdge="none"
+            android:minHeight="70dp"
+            android:paddingLeft="20dp"
+            android:text="Niezbędnik Neona"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

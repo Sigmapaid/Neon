@@ -1,7 +1,9 @@
 package com.example.neon.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText userName;
     private EditText password;
     private Button btnLogin;
-    private int counter = 3;
     private ProgressDialog pd;
 
     Retrofit.Builder builder = new Retrofit.Builder()
@@ -72,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String token;
 
+    private void saveToken(String token) {
+        SharedPreferences sharedPref = this.getSharedPreferences("com.example.neon.data.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("token", token);
+        editor.commit();
+    }
+
     private void login() {
         pd = ProgressDialog.show(this,"Please Wait...","Please Wait...");
 
@@ -84,7 +92,12 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 //                    Toast.makeText(MainActivity.this,response.body().getAccessToken(),Toast.LENGTH_LONG).show();
                     token = response.body().getAccessToken();
-                    getFlights(token);
+                    saveToken(token);
+//                    getFlights(token);
+
+                    Intent intent = new Intent(MainActivity.this, HomeScreenActivity.class);
+                    pd.dismiss();
+                    startActivity(intent);
 
 
                 }else {
@@ -125,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
 //                        }
 //                    }
                     String json = new Gson().toJson(response.body());
-                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+//                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                    Intent intent = new Intent(MainActivity.this, HomeScreenActivity.class);
                     intent.putExtra("flight_json",json);
                     pd.dismiss();
                     startActivity(intent);

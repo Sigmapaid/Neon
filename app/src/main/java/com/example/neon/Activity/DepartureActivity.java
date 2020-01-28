@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -18,10 +17,9 @@ import com.example.neon.data.model.Flight;
 import com.example.neon.data.model.FlightList;
 import com.google.gson.Gson;
 
-import java.util.Date;
 import java.util.List;
 
-public class SecondActivity extends AppCompatActivity {
+public class DepartureActivity extends AppCompatActivity {
 
     private ListView lvFlight;
     public List<Flight> data;
