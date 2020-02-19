@@ -1,14 +1,10 @@
 package com.example.neon.data.model;
 
 
-        import android.arch.persistence.room.ColumnInfo;
-        import android.arch.persistence.room.Entity;
-        import android.arch.persistence.room.Ignore;
-        import android.arch.persistence.room.PrimaryKey;
-
-/**
- * Created by ixi.Dv on 13/05/2018.
- */
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "notes")
 public class Note {

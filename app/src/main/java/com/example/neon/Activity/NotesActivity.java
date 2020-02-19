@@ -67,7 +67,7 @@ public class NotesActivity extends AppCompatActivity {
             });
             StringBuilder stringBuilder = new StringBuilder();
             for (int i=0; i<paths.length; i++) {
-                stringBuilder.append(Files.toString(new File(path + paths[i])), Charsets.UTF_8);
+//                stringBuilder.append(Files.toString(new File(path + paths[i])), Charsets.UTF_8);
                 stringBuilder.append(interlude);
             }
         return stringBuilder.toString();

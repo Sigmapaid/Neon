@@ -20,6 +20,8 @@
         <activity android:name=".Activity.HomeScreenActivity" />
         <activity android:name=".Activity.SecondActivity" />
         <activity android:name=".Activity.FlightDetailActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".EditNoteActivity" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

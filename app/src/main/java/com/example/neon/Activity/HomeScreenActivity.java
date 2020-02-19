@@ -82,7 +82,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         btnNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeScreenActivity.this, NotesActivity.class);
+                Intent intent = new Intent(HomeScreenActivity.this, com.example.neon.MainActivity.class);
                 startActivity(intent);
             }
         });

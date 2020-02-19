@@ -1,20 +1,24 @@
 package com.example.neon;
-        import android.content.Context;
-        import android.support.annotation.NonNull;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.CheckBox;
-        import android.widget.TextView;
 
-        import com.ixidev.simplenotepad.R;
-        import com.ixidev.simplenotepad.callbacks.NoteEventListener;
-        import com.ixidev.simplenotepad.model.Note;
-        import com.ixidev.simplenotepad.utils.NoteUtils;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
-        import java.util.ArrayList;
-        import java.util.List;
+//import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.neon.callbacks.NoteEventListener;
+import com.example.neon.data.model.Note;
+
+//import org.checkerframework.checker.nullness.qual.NonNull;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ixi.Dv on 13/05/2018.
@@ -124,15 +128,3 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteHolder> 
         notifyDataSetChanged();
     }
 }
-© 2020 GitHub, Inc.
-        Terms
-        Privacy
-        Security
-        Status
-        Help
-        Contact GitHub
-        Pricing
-        API
-        Training
-        Blog
-        About
